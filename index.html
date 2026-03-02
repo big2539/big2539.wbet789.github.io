@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แชร์โปรเครดิตฟรี</title>
+
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:#000;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* 🔥 พื้นหลังเอฟเฟกต์แสงแดง */
+body::before{
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle at center, #ff0000 0%, #000 70%);
+  animation: glow 3s infinite alternate ease-in-out;
+  z-index:-1;
+}
+
+@keyframes glow{
+  0%{opacity:0.6;}
+  100%{opacity:1;}
+}
+
+.container{
+  text-align:center;
+  max-width:400px;
+  padding:20px;
+}
+
+img{
+  width:100%;
+  border-radius:15px;
+  box-shadow:0 0 30px #ff0000;
+}
+
+.text{
+  margin-top:15px;
+  font-size:20px;
+  font-weight:bold;
+  text-shadow:0 0 10px #ff0000;
+}
+
+button{
+  margin-top:20px;
+  padding:15px 30px;
+  font-size:18px;
+  font-weight:bold;
+  border:none;
+  border-radius:50px;
+  cursor:pointer;
+  background:linear-gradient(45deg,#ff0000,#ff9900);
+  color:#fff;
+  box-shadow:0 0 20px #ff0000;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+.footer{
+  margin-top:10px;
+  font-size:14px;
+  opacity:0.9;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <img src="https://img2.pic.in.th/1c84ccf9-f728-43fd-ae2f-d3ef22577062.jpg">
+
+  <div class="text">
+    🔥 โปรแรง แจกเครดิตฟรี ไม่ต้องฝาก<br>
+    กดแชร์รับสิทธิ์ทันที!
+  </div>
+
+  <button onclick="shareFlex()">กดแชร์ตอนนี้</button>
+
+  <div class="footer">
+    คลิกแล้วเลือกรายชื่อเพื่อนเพื่อแชร์
+  </div>
+</div>
+
+<script>
+async function main() {
+  await liff.init({ liffId: "2009033240-Q45swj3M" });
+}
+main();
+
+async function shareFlex() {
+  if (!liff.isApiAvailable('shareTargetPicker')) {
+    alert("กรุณาเปิดผ่านแอป LINE");
+    return;
+  }
+
+  await liff.shareTargetPicker([
+    {
+      type: "flex",
+      altText: "🔥 โปรแรง แจกเครดิตฟรี ไม่ต้องฝาก",
+      contents: {
+        type: "bubble",
+        size: "giga",
+        hero: {
+          type: "image",
+          url: "https://img2.pic.in.th/1c84ccf9-f728-43fd-ae2f-d3ef22577062.jpg",
+          size: "full",
+          aspectRatio: "1:1",
+          aspectMode: "cover"
+        },
+        body: {
+          type: "box",
+          layout: "vertical",
+          backgroundColor: "#000000",
+          spacing: "md",
+          contents: [
+            {
+              type: "text",
+              text: "🔥 แจกเครดิตฟรี",
+              weight: "bold",
+              size: "xxl",
+              align: "center",
+              color: "#ff9900"
+            },
+            {
+              type: "text",
+              text: "ไม่ต้องฝาก • ไม่ต้องทำยอด",
+              size: "lg",
+              align: "center",
+              color: "#ffffff",
+              margin: "md"
+            },
+            {
+              type: "text",
+              text: "รับก่อนเต็มระบบ!",
+              size: "md",
+              align: "center",
+              color: "#ff0000",
+              margin: "sm"
+            }
+          ]
+        },
+        footer: {
+          type: "box",
+          layout: "vertical",
+          spacing: "md",
+          backgroundColor: "#111111",
+          contents: [
+            {
+              type: "button",
+              style: "primary",
+              color: "#ff0000",
+              height: "lg",
+              action: {
+                type: "uri",
+                label: "🎁 กดรับเครดิตฟรี",
+                uri: "https://lin.ee/Blc5G9B"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]);
+}
+</script>
+
+</body>
+</html>
