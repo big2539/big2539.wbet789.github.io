@@ -69,7 +69,6 @@ button:hover{
 </div>
 
 <script>
-<script>
 const LIFF_ID = "2009033240-Q45swj3M";
 
 async function main() {
@@ -89,60 +88,68 @@ async function shareFlex() {
         return;
     }
 
-    const result = await liff.shareTargetPicker([
-        {
-            type: "flex",
-            altText: "ร่วมกิจกรรมพิเศษ",
-            contents: {
-                type: "bubble",
-                hero: {
-                    type: "image",
-                    url: "https://img2.pic.in.th/1c84ccf9-f728-43fd-ae2f-d3ef22577062.jpg",
-                    size: "full",
-                    aspectRatio: "1:1",
-                    aspectMode: "cover"
-                },
-                body: {
-                    type: "box",
-                    layout: "vertical",
-                    contents: [
-                        {
-                            type: "text",
-                            text: "🎉 กิจกรรมพิเศษ",
-                            weight: "bold",
-                            size: "xl"
-                        },
-                        {
-                            type: "text",
-                            text: "กดปุ่มด้านล่างเพื่อเข้าร่วมกิจกรรมวันนี้",
-                            wrap: true,
-                            size: "sm",
-                            margin: "md"
-                        }
-                    ]
-                },
-                footer: {
-                    type: "box",
-                    layout: "vertical",
-                    contents: [
-                        {
-                            type: "button",
-                            style: "primary",
-                            action: {
-                                type: "uri",
-                                label: "เข้าร่วมกิจกรรม",
-                                uri: "https://lin.ee/Blc5G9B"
+    try {
+        const result = await liff.shareTargetPicker([
+            {
+                type: "flex",
+                altText: "ร่วมกิจกรรมพิเศษ",
+                contents: {
+                    type: "bubble",
+                    hero: {
+                        type: "image",
+                        url: "https://img2.pic.in.th/1c84ccf9-f728-43fd-ae2f-d3ef22577062.jpg",
+                        size: "giga",
+                        aspectRatio: "1:1",
+                        aspectMode: "cover"
+                    },
+                    body: {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                            {
+                                type: "text",
+                                text: "🎉 กิจกรรมพิเศษ",
+                                weight: "bold",
+                                size: "xl"
+                            },
+                            {
+                                type: "text",
+                                text: "กดปุ่มด้านล่างเพื่อเข้าร่วมกิจกรรมวันนี้",
+                                wrap: true,
+                                size: "sm",
+                                margin: "md"
                             }
-                        }
-                    ]
+                        ]
+                    },
+                    footer: {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                            {
+                                type: "button",
+                                style: "primary",
+                                action: {
+                                    type: "uri",
+                                    label: "เข้าร่วมกิจกรรม",
+                                    uri: "https://lin.ee/Blc5G9B"
+                                }
+                            }
+                        ]
+                    }
                 }
             }
-        }
-    ]);
+        ]);
 
-    if (result) {
-        alert("ขอขอบคุณที่ร่วมกิจกรรม");
-        window.location.href = "https://lin.ee/Blc5G9B";
+        if (result) {
+            alert("ขอขอบคุณที่ร่วมกิจกรรม");
+            window.location.href = "https://lin.ee/Blc5G9B";
+        }
+
+    } catch (error) {
+        alert("เกิดข้อผิดพลาด: " + error);
     }
 }
 </script>
+
+</body>
+</html>
