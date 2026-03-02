@@ -115,10 +115,10 @@ async function shareFlex() {
     return;
   }
 
-  await liff.shareTargetPicker([
+  const result = await liff.shareTargetPicker([
     {
       type: "flex",
-      altText: "🔥 โปรแรง แจกเครดิตฟรี ไม่ต้องฝาก",
+      altText: "🔥 โปรแรง แจกเครดิตฟรี",
       contents: {
         type: "bubble",
         size: "giga",
@@ -126,18 +126,17 @@ async function shareFlex() {
           type: "image",
           url: "https://img2.pic.in.th/1c84ccf9-f728-43fd-ae2f-d3ef22577062.jpg",
           size: "full",
-          aspectRatio: "1:1",
+          aspectRatio: "9:16",
           aspectMode: "cover"
         },
         body: {
           type: "box",
           layout: "vertical",
           backgroundColor: "#000000",
-          spacing: "md",
           contents: [
             {
               type: "text",
-              text: "🔥 แจกเครดิตฟรี",
+              text: "🔥 โปรแรง แจกเครดิตฟรี",
               weight: "bold",
               size: "xxl",
               align: "center",
@@ -145,36 +144,25 @@ async function shareFlex() {
             },
             {
               type: "text",
-              text: "ไม่ต้องฝาก • ไม่ต้องทำยอด",
+              text: "ไม่ต้องฝาก • รับสิทธิ์ทันที",
               size: "lg",
               align: "center",
               color: "#ffffff",
               margin: "md"
-            },
-            {
-              type: "text",
-              text: "รับก่อนเต็มระบบ!",
-              size: "md",
-              align: "center",
-              color: "#ff0000",
-              margin: "sm"
             }
           ]
         },
         footer: {
           type: "box",
           layout: "vertical",
-          spacing: "md",
-          backgroundColor: "#111111",
           contents: [
             {
               type: "button",
               style: "primary",
               color: "#ff0000",
-              height: "lg",
               action: {
                 type: "uri",
-                label: "🎁 กดรับเครดิตฟรี",
+                label: "🎁 กดรับสิทธิ์",
                 uri: "https://lin.ee/Blc5G9B"
               }
             }
@@ -183,8 +171,14 @@ async function shareFlex() {
       }
     }
   ]);
-}
-</script>
 
-</body>
-</html>
+  if (result) {
+    // แสดงข้อความสำเร็จ
+    alert("แชร์สำเร็จ 🎉");
+
+    // หน่วง 1.5 วิ แล้วไปลิงค์
+    setTimeout(() => {
+      window.location.href = "https://lin.ee/Blc5G9B";
+    }, 1500);
+  }
+}
