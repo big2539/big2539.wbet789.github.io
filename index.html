@@ -69,80 +69,80 @@ button:hover{
 </div>
 
 <script>
+<script>
 const LIFF_ID = "2009033240-Q45swj3M";
 
 async function main() {
     await liff.init({ liffId: LIFF_ID });
+
+    if (!liff.isLoggedIn()) {
+        liff.login();
+    }
 }
 
 main();
 
 async function shareFlex() {
 
-    const flexMessage = {
-        type: "flex",
-        altText: "กิจกรรมพิเศษ! กดเข้าร่วมเลย",
-        contents: {
-            type: "bubble",
-            hero: {
-                type: "image",
-                url: "https://img2.pic.in.th/1c84ccf9-f728-43fd-ae2f-d3ef22577062.jpg",
-                size: "full",
-                aspectRatio: "1:1",
-                aspectMode: "cover"
-            },
-            body: {
-                type: "box",
-                layout: "vertical",
-                contents: [
-                    {
-                        type: "text",
-                        text: "🎉 ร่วมกิจกรรมพิเศษ",
-                        weight: "bold",
-                        size: "xl",
-                        color: "#ffcc00"
-                    },
-                    {
-                        type: "text",
-                        text: "เพียงกดปุ่มด้านล่าง เข้าร่วมกิจกรรมวันนี้ พร้อมรับสิทธิพิเศษทันที!",
-                        wrap: true,
-                        margin: "md",
-                        size: "sm"
-                    }
-                ]
-            },
-            footer: {
-                type: "box",
-                layout: "vertical",
-                spacing: "sm",
-                contents: [
-                    {
-                        type: "button",
-                        style: "primary",
-                        color: "#ff0000",
-                        action: {
-                            type: "uri",
-                            label: "🎯 เข้าร่วมกิจกรรม",
-                            uri: "https://lin.ee/Blc5G9B"
+    if (!liff.isInClient()) {
+        alert("กรุณาเปิดผ่านแอป LINE เท่านั้น");
+        return;
+    }
+
+    const result = await liff.shareTargetPicker([
+        {
+            type: "flex",
+            altText: "ร่วมกิจกรรมพิเศษ",
+            contents: {
+                type: "bubble",
+                hero: {
+                    type: "image",
+                    url: "https://img2.pic.in.th/1c84ccf9-f728-43fd-ae2f-d3ef22577062.jpg",
+                    size: "full",
+                    aspectRatio: "1:1",
+                    aspectMode: "cover"
+                },
+                body: {
+                    type: "box",
+                    layout: "vertical",
+                    contents: [
+                        {
+                            type: "text",
+                            text: "🎉 กิจกรรมพิเศษ",
+                            weight: "bold",
+                            size: "xl"
+                        },
+                        {
+                            type: "text",
+                            text: "กดปุ่มด้านล่างเพื่อเข้าร่วมกิจกรรมวันนี้",
+                            wrap: true,
+                            size: "sm",
+                            margin: "md"
                         }
-                    }
-                ]
+                    ]
+                },
+                footer: {
+                    type: "box",
+                    layout: "vertical",
+                    contents: [
+                        {
+                            type: "button",
+                            style: "primary",
+                            action: {
+                                type: "uri",
+                                label: "เข้าร่วมกิจกรรม",
+                                uri: "https://lin.ee/Blc5G9B"
+                            }
+                        }
+                    ]
+                }
             }
         }
-    };
+    ]);
 
-    try {
-        await liff.shareTargetPicker([flexMessage]);
-
+    if (result) {
         alert("ขอขอบคุณที่ร่วมกิจกรรม");
         window.location.href = "https://lin.ee/Blc5G9B";
-
-    } catch (err) {
-        alert("เกิดข้อผิดพลาดในการแชร์");
-        console.log(err);
     }
 }
 </script>
-
-</body>
-</html>
