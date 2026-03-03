@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ร่วมกิจกรรมพิเศษ</title>
+<title>แชร์โปรโมชั่นพิเศษ</title>
 
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
@@ -11,144 +11,156 @@
 body{
     margin:0;
     padding:0;
-    background:#000;
-    font-family: 'Segoe UI', sans-serif;
-    text-align:center;
+    font-family: 'Prompt', sans-serif;
+    background:#0f172a;
     color:#fff;
+    text-align:center;
 }
 
 .container{
+    max-width:420px;
+    margin:auto;
     padding:20px;
 }
 
 img{
     width:100%;
-    max-width:500px;
-    border-radius:15px;
-    box-shadow:0 0 20px rgba(255,215,0,0.6);
+    border-radius:16px;
+    box-shadow:0 0 20px rgba(0,255,200,0.4);
 }
 
 .caption{
-    margin-top:15px;
-    font-size:18px;
-    font-weight:bold;
-    color:#FFD700;
+    margin-top:12px;
+    font-size:16px;
+    color:#cbd5e1;
 }
 
 button{
-    margin-top:25px;
-    padding:15px 30px;
+    margin-top:20px;
+    width:100%;
+    padding:15px;
     font-size:18px;
     font-weight:bold;
     border:none;
-    border-radius:50px;
-    background:linear-gradient(45deg,#ff0000,#ffcc00);
+    border-radius:14px;
+    background:linear-gradient(90deg,#00f5a0,#00d9f5);
     color:#000;
     cursor:pointer;
-    box-shadow:0 0 15px #ffcc00;
-    transition:0.3s;
 }
 
-button:hover{
-    transform:scale(1.05);
+button:active{
+    transform:scale(0.97);
+}
+
+#success{
+    margin-top:15px;
+    display:none;
+    color:#00f5a0;
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
-    <img src="https://img2.pic.in.th/1c84ccf9-f728-43fd-ae2f-d3ef22577062.jpg">
-    
+
+    <img src="https://img2.pic.in.th/b74667a3-0ac6-4fe3-ac82-f05703ca1bb2.jpg">
+
     <div class="caption">
-        🔥 กิจกรรมพิเศษ เพียงกดแชร์ ลุ้นรับสิทธิพิเศษทันที!
+        แชร์ให้เพื่อนหรือกลุ่ม เพื่อรับสิทธิ์พิเศษทันที 🎁
     </div>
 
-    <button onclick="shareFlex()">
-        🚀 กดแชร์ให้เพื่อน/กลุ่ม
-    </button>
+    <button onclick="shareFlex()">📤 กดแชร์เลย</button>
+
+    <div id="success">แชร์สำเร็จแล้ว 🎉</div>
+
 </div>
 
 <script>
-const LIFF_ID = "2009033240-Q45swj3M";
 
-async function main() {
-    await liff.init({ liffId: LIFF_ID });
-
-    if (!liff.isLoggedIn()) {
-        liff.login();
-    }
+async function initLIFF(){
+    await liff.init({ liffId: "2009033240-Q45swj3M" });
 }
+initLIFF();
 
-main();
+async function shareFlex(){
 
-async function shareFlex() {
-
-    if (!liff.isInClient()) {
-        alert("กรุณาเปิดผ่านแอป LINE เท่านั้น");
+    if(!liff.isLoggedIn()){
+        liff.login();
         return;
     }
 
-    try {
-        const result = await liff.shareTargetPicker([
-            {
-                type: "flex",
-                altText: "ร่วมกิจกรรมพิเศษ",
-                contents: {
-                    type: "bubble",
-                    hero: {
-                        type: "image",
-                        url: "https://img2.pic.in.th/1c84ccf9-f728-43fd-ae2f-d3ef22577062.jpg",
-                        size: "full",
-                        aspectRatio: "1:1",
-                        aspectMode: "cover"
+    const flexMessage = {
+        type: "flex",
+        altText: "โปรโมชั่นพิเศษ 24 ชั่วโมง",
+        contents: {
+            type: "bubble",
+            size: "mega",
+
+            hero: {
+                type: "image",
+                url: "https://img2.pic.in.th/b74667a3-0ac6-4fe3-ac82-f05703ca1bb2.jpg",
+                size: "full",
+                aspectMode: "cover",
+                aspectRatio: "1:1"
+            },
+
+            body: {
+                type: "box",
+                layout: "vertical",
+                spacing: "md",
+                backgroundColor: "#0f172a",
+                paddingAll: "16px",
+                contents: [
+                    {
+                        type: "text",
+                        text: "โปรโมชั่นพิเศษ 24 ชั่วโมง",
+                        weight: "bold",
+                        size: "xl",
+                        align: "center",
+                        color: "#00f5a0"
                     },
-                    body: {
-                        type: "box",
-                        layout: "vertical",
-                        contents: [
-                            {
-                                type: "text",
-                                text: "🎉 กิจกรรมพิเศษ",
-                                weight: "bold",
-                                size: "xl"
-                            },
-                            {
-                                type: "text",
-                                text: "กดปุ่มด้านล่างเพื่อเข้าร่วมกิจกรรมวันนี้",
-                                wrap: true,
-                                size: "sm",
-                                margin: "md"
-                            }
-                        ]
-                    },
-                    footer: {
-                        type: "box",
-                        layout: "vertical",
-                        contents: [
-                            {
-                                type: "button",
-                                style: "primary",
-                                action: {
-                                    type: "uri",
-                                    label: "เข้าร่วมกิจกรรม",
-                                    uri: "https://lin.ee/Blc5G9B"
-                                }
-                            }
-                        ]
+                    {
+                        type: "text",
+                        text: "สิทธิ์พิเศษสำหรับสมาชิกวันนี้เท่านั้น รีบกดรับก่อนหมดเวลา",
+                        size: "sm",
+                        wrap: true,
+                        align: "center",
+                        color: "#e2e8f0"
                     }
-                }
+                ]
+            },
+
+            footer: {
+                type: "box",
+                layout: "vertical",
+                backgroundColor: "#020617",
+                paddingAll: "14px",
+                contents: [
+                    {
+                        type: "button",
+                        style: "primary",
+                        height: "sm",
+                        color: "#00d9f5",
+                        action: {
+                            type: "uri",
+                            label: "กดรับสิทธิ์ทันที",
+                            uri: "https://24hrpung.carrd.co"
+                        }
+                    }
+                ]
             }
-        ]);
-
-        if (result) {
-            alert("ขอขอบคุณที่ร่วมกิจกรรม");
-            window.location.href = "https://lin.ee/Blc5G9B";
         }
+    };
 
-    } catch (error) {
-        alert("เกิดข้อผิดพลาด: " + error);
+    try{
+        await liff.shareTargetPicker([flexMessage]);
+        document.getElementById("success").style.display = "block";
+    }catch(err){
+        console.error(err);
     }
 }
+
 </script>
 
 </body>
